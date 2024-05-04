@@ -37,6 +37,8 @@
 
 - 학원이나 국비 지원을 활용하여 프로그래밍을 배워보세요.
 - 스프링 부트나 AWS 등에 대한 추가 학습을 고려해보세요. 요금 발생 주의하구요.
+- https://github.com/infott2t/springboot-querydsl/blob/master/src/main/resources/application-oauth.properties - 이 파일에 Oauth2.0 설정. 간편로그인. 각각 서비스마다 ID와 암호를 만드는 부분이 필요합니다.
+- https://github.com/infott2t/springboot-querydsl/blob/master/src/main/resources/application.properties  - MySQL, 설정 이 파일을 참조해보세요.
 
 ## 마무리
 
