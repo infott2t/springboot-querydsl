@@ -28,8 +28,11 @@
 
 다음은 프로젝트와 관련된 추가 자료입니다.
 
-- [QueryDSL 실전 강의](https://www.inflearn.com/course/querydsl-%EC%8B%A4%EC%A0%84) - Inflearn 강의. Spring boot강의를 들어보는 것을 추천합니다.
+- [QueryDSL 실전 강의](https://www.inflearn.com/course/querydsl-%EC%8B%A4%EC%A0%84) - Inflearn 강의. Spring boot강의를 들어보는 것을 추천합니다. 중급자 이상.
 - [스프링 부트와 AWS로 혼자 구현하는 웹 서비스](https://search.shopping.naver.com/book/catalog/32436253723) - 서적
+
+프로젝트와 약간 다르지만 프로그래밍 공부하기 좋다고 생각하는 책이네요. 초급자의 경우 이 책을 공부해보세요.
+- [예제로 배우는 스프링 부트 입문](https://search.shopping.naver.com/book/catalog/32480598682) - 서적
 
 ## 공부 및 학습 추천
 
