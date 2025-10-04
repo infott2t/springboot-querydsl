@@ -35,7 +35,7 @@
     </div>
     <div class="col-md-6">
         <br/>
-        <a th:if="${Role == 'USER' or Role == 'ADMIN' }" href="/changeRole" class="btn btn-primary">Change Role</a>
+        <a th:if="${Role == 'USER'}" href="/changeRole" class="btn btn-primary">Change Role</a>
         <a th:if="${userName}" href="/logout" class="btn btn-info active" role="button">Logout</a>
         <div th:unless="${userName}">
             <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
@@ -44,7 +44,7 @@
     </div>
     <br/>
     <p>Move table, <a th:href="@{/administer/instanceurl/posts}">Posts</a></p>
-    <p>Move table, <a th:href="@{/administer/instanceurl/userInfo}">UserInfo</a></p>
+    <p  th:if="${Role == 'ADMIN' }">Move table, <a th:href="@{/administer/instanceurl/userInfo}">UserInfo</a></p>
 
     <p th:if="${Role == 'ADMIN' }">Move table, <a th:href="@{/administer/instanceurl/userUploadGradeAdmin}">UserUploadGradeAdmin</a></p>
 <!-- Add, link...-->

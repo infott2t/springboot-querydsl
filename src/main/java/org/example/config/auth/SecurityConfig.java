@@ -22,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile").permitAll()
                 .antMatchers("/api/v1/**").hasRole(Role.USER.name())
                 .antMatchers("/administer/instanceurl/userUploadGradeAdmin").hasRole(Role.ADMIN.name())
+                .antMatchers("/administer/instanceurl/userInfo").hasRole(Role.ADMIN.name())
                 .anyRequest().authenticated()
 
                 .and()
