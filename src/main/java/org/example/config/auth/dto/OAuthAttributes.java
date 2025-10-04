@@ -66,6 +66,8 @@ public class OAuthAttributes {
                 .build();
     }
 
+
+
     public UserInfo toInfoEntity(User user){
         return UserInfo.builder()
                 .isDel("N")

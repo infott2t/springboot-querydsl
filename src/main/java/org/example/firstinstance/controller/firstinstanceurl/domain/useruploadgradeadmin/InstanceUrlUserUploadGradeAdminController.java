@@ -1,6 +1,10 @@
 package org.example.firstinstance.controller.firstinstanceurl.domain.useruploadgradeadmin;
 import lombok.RequiredArgsConstructor;
+import org.example.config.auth.LoginUser;
+import org.example.config.auth.dto.SessionUser;
+import org.example.domain.user.Role;
 import org.example.domain.user.User;
+import org.example.domain.user.UserRepository;
 import org.example.domain.user.UserService;
 // import Service, Entity, ApiDtoForm.
 import org.example.domain.useruploadgradeadmin.UserUploadGradeAdmin;
@@ -27,6 +31,7 @@ public class InstanceUrlUserUploadGradeAdminController {
 
     private final UserUploadGradeAdminService userUploadGradeAdminService;
     private final UserService userService;
+    private final UserRepository userRepository;
 
     @GetMapping("/administer/instanceurl/userUploadGradeAdmin")
     public String index(Model model, UserUploadGradeAdminSearchCondition condition,
@@ -160,11 +165,16 @@ public class InstanceUrlUserUploadGradeAdminController {
     @PostMapping("/administer/instanceurl/userUploadGradeAdmin/update_2")
     public String update_2(Model model, @RequestParam(value="id")Long id,UserUploadGradeAdminApiDtoForm userForm, UserUploadGradeAdminSearchCondition condition,
                            @RequestParam(value="page", required=false) Integer page,
-                           Pageable pageable) throws Exception {
+                           Pageable pageable,  @LoginUser SessionUser loginUser) throws Exception {
 
+        if (loginUser != null) {
+            model.addAttribute("userName", loginUser.getName());
+            model.addAttribute("Role", loginUser.getRole());
+        }
 
         UserUploadGradeAdmin userUploadGradeAdmin = null;
         User user = null;
+        User permitIdUser = null;
         try{
             userUploadGradeAdmin = userUploadGradeAdminService.findById(id);
         }catch(Exception e){
@@ -185,8 +195,24 @@ public class InstanceUrlUserUploadGradeAdminController {
         userUploadGradeAdmin.setCertNum(userForm.getCertNum());
         userUploadGradeAdmin.setOriginFile(userForm.getOriginFile());
         userUploadGradeAdmin.setUuidPath(userForm.getUuidPath());
-        userUploadGradeAdmin.setWhoPermit(userForm.getWhoPermit());
+        userUploadGradeAdmin.setWhoPermit(loginUser.getId());
         userUploadGradeAdmin.setIsPermit(userForm.getIsPermit());
+        if(userForm.getIsPermit().equals("Y")){
+            User updateUser = userRepository.findByEmail(userForm.getEmail()).orElseThrow();
+            System.out.println("update000 " +userUploadGradeAdmin.getId()+ " "+ updateUser.getRole());
+            updateUser = userRepository.findByEmail(userForm.getEmail())
+                    .map(entity -> entity.updateRole(Role.ADMIN)).orElseThrow();
+
+            User make = userRepository.save(updateUser);
+        }else {
+            User updateUser = userRepository.findByEmail(userForm.getEmail()).orElseThrow();
+            System.out.println("update000 " +userUploadGradeAdmin.getId()+ " "+ updateUser.getRole());
+            updateUser = userRepository.findByEmail(userForm.getEmail())
+                    .map(entity -> entity.updateRole(Role.USER)).orElseThrow();
+
+            User make = userRepository.save(updateUser);
+        }
+
         userUploadGradeAdmin.setIsDel(userForm.getIsDel());
         userUploadGradeAdmin.setModifiedDate(LocalDateTime.now());
 

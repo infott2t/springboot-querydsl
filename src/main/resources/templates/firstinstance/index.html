@@ -45,7 +45,8 @@
     <br/>
     <p>Move table, <a th:href="@{/administer/instanceurl/posts}">Posts</a></p>
     <p>Move table, <a th:href="@{/administer/instanceurl/userInfo}">UserInfo</a></p>
-    <p>Move table, <a th:href="@{/administer/instanceurl/userUploadGradeAdmin}">UserUploadGradeAdmin</a></p>
+
+    <p th:if="${Role == 'ADMIN' }">Move table, <a th:href="@{/administer/instanceurl/userUploadGradeAdmin}">UserUploadGradeAdmin</a></p>
 <!-- Add, link...-->
     <!--  -->
 <br/>
